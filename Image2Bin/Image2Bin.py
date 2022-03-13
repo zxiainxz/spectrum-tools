@@ -136,7 +136,7 @@ def DisplayResults(data, args):
         row = data[i]
         db = ', '.join(row)
 
-        if i == len(data) - 1:
+        if i == len(data) - 1 and args.vertical_shift:
             print(label + "Padding: db " + db)
         else:
             print(label + "Data" + str(i) + ": db " + db)
