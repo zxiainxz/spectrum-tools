@@ -11,6 +11,7 @@ import argparse, os, sys
 # --order=row|zigzag|column
 # --output=filename
 # --invert-mask
+# --lookup-table
 
 def CreateImageData(im):
     if im is None:
@@ -133,6 +134,12 @@ def DisplayResults(data, args):
     print("; Order - " + args.order)
     print("; Shifted - Horizontal: " + str(args.shift) + " | Vertical: " + str(args.vertical_shift))
 
+    if args.lookup_table and args.shift:
+        print(label + "Data: dw ", end='')
+        for i in range(0, 7):
+            print(label + 'Data' + str(i) + ', ', end='')
+        print(label + 'Data7')
+
     for i in range(0, len(data)):
         row = data[i]
         db = ', '.join(row)
@@ -155,6 +162,7 @@ def main():
     parser.add_argument('--vertical-shift', action='store_true', help='shift the sprite vertically')
     parser.add_argument('--order', choices=['row', 'zigzag', 'column'], default='row', help='the order the data should be sorted in')
     parser.add_argument('--invert-mask', action='store_true', help='invert the mask graphic')
+    parser.add_argument('--lookup-table', action='store_true', help='write a lookup table for the data at the start')
 
     args = parser.parse_args()
 
