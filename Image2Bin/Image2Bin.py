@@ -63,8 +63,9 @@ def OrderColumn(data, maskdata, size, vertical):
     output = []
 
     vpadding = ['0','0','0','0','0','0','0','0']
+
     if maskdata is not None:
-        vpadding = vpadding + vpadding
+        vpadding = ['255', '0', '255', '0', '255', '0', '255', '0', '255', '0', '255', '0', '255', '0', '255', '0']
 
     for s in range(0, len(data)):
 
