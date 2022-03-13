@@ -10,6 +10,7 @@ import argparse, os, sys
 # --shifted
 # --order=row|zigzag|column
 # --output=filename
+# --invert-mask
 
 def CreateImageData(im):
     if im is None:
@@ -153,6 +154,7 @@ def main():
     parser.add_argument('--shift', action='store_true', help='shift the sprite horizontally')
     parser.add_argument('--vertical-shift', action='store_true', help='shift the sprite vertically')
     parser.add_argument('--order', choices=['row', 'zigzag', 'column'], default='row', help='the order the data should be sorted in')
+    parser.add_argument('--invert-mask', action='store_true', help='invert the mask graphic')
 
     args = parser.parse_args()
 
@@ -181,6 +183,9 @@ def main():
 
             if maskdata is not None:
                 shiftedmdata = Shift(maskdata, s)
+                if args.invert_mask:
+                    for sm in shiftedmdata:
+                        sm.invert()
                 shiftedmaskdata.append(shiftedmdata)
             else:
                 shiftedmaskdata = None
