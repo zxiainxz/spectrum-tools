@@ -25,7 +25,12 @@ def CreateImageData(im):
         ba = bitarray()
 
         for x in range(0, im.size[0]):
-            ba.append(px[x, y])
+            if px[x, y] > 0:
+                bit = 1
+            else:
+                bit = 0
+
+            ba.append(bit)
 
         data.append(ba)
 
